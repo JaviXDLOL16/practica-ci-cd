@@ -16,7 +16,9 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    docker.image(DOCKER_IMAGE).inside {
+                    docker.image(DOCKER_IMAGE).inside('-u root') {
+                        // Configurar npm cache en un directorio accesible
+                        sh 'npm config set cache /tmp/.npm-cache --global'
                         // Usar --unsafe-perm para evitar problemas de permisos
                         sh 'npm install --unsafe-perm'
                         sh 'npm test'
