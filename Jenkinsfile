@@ -17,7 +17,8 @@ pipeline {
             steps {
                 script {
                     docker.image(DOCKER_IMAGE).inside {
-                        sh 'npm install'
+                        // Cambiar la ubicación de la caché de npm para evitar problemas de permisos
+                        sh 'npm config set cache /tmp/.npm-cache --global && npm install'
                         sh 'npm test'
                     }
                 }
