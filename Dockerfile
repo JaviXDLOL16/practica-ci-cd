@@ -3,9 +3,10 @@ FROM node:14
 WORKDIR /app
 
 COPY package*.json ./
-
 RUN npm install --unsafe-perm
-RUN npm install mocha supertest --global
+RUN npm install -g mocha
+RUN npm install supertest --save-dev
+
 
 COPY . .
 
